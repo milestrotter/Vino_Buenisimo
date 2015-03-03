@@ -1,0 +1,61 @@
+<!-- <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript">
+	 //  $(document).ready(function() {
+  //   	$("form").submit(function(){
+		//     $.get($(this).attr('action')+"?callback=?", $(this).serialize(), function(wine)
+		//     {   
+		//       console.log($('form').attr('action'))
+		//       console.log(wine.Products.List);
+		//     }, 'json');
+		//     return false;
+		//   });
+		// });
+	</script>
+</head> -->
+<nav class='navbar navbar-default'>
+	<div classs='navbar-header'>
+		<a href="/home" class='navbar-brand'>Vino Buenisimo</a>
+	</div>
+	<div class='collapse navbar-collapse'>
+		<ul class='nav navbar-nav'>
+			<li><a href="/home">Home</a></li>
+			<li><a href="/users/<%= @user.id %>/cellars">Cellars</a></li>
+			<li><a href="/friends">Friends</a></li>
+			<li><a href="/users/<%= @user.id %>">Profile</a></li>
+			<li><a href="/messages">Messages</a></li>
+			<li class='active btn btn-default'><a href="/trends">Trends</a></li>
+		</ul>
+	<div class='user-nav'>
+		<h4>Welcome <%= @user.first_name %></h4>
+		<p><%= link_to('Log Off', destroy_user_session_path, :method => "delete", :class => "btn btn-default") %></p>
+	</div>
+	</div>
+</nav>
+<div class='container'>
+	<div class='row'>
+		<div class='col-sm-12'>
+			<h1>Search for Trending Wines</h1>
+			<!-- <form action='http://services.wine.com/api/beta2/service.svc/json/catalog' method='get'/>​ -->
+			<form action='/trends/show' method='get'>
+<!-- 				<select name='filter'>​
+					<option value = ''>Select a filter</option>​
+				</select>​ -->
+		​		<input type='text' name='search' placeholder='Search for a type of Wine'>
+				<select name='sort'>
+					<option value = ''>Sort By</option>​
+					<option value='rating|ascending'>Rating</option>
+					<option value='price|ascending'>Price</option>
+				</select>
+				<input type='hidden' name='apikey' value='f6bc229208d84d35292a06aeb4c82b53' />​
+				<input class='btn btn-primary' type='submit' value='Get Wine' />​
+			</form>
+			<div>
+				<p><span class='output'></span></p>
+				<img >
+			</div>
+		</div>
+	</div>
+</div>
+
+

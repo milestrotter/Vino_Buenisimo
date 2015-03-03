@@ -1,0 +1,55 @@
+<nav class='navbar navbar-default'>
+	<div classs='navbar-header'>
+		<a href="/home" class='navbar-brand'>Vino Buenisimo</a>
+	</div>
+	<div class='collapse navbar-collapse'>
+		<ul class='nav navbar-nav'>
+			<li><a href="/home">Home</a></li>
+			<li class='active btn btn-default'><a href="/users/<%= @user.id %>/cellars">Cellars</a></li>
+			<li><a href="/friends">Friends</a></li>
+			<li><a href="/users/<%= @user.id %>">Profile</a></li>
+			<li><a href="/messages">Messages</a></li>
+			<li><a href="/trends">Trends</a></li>
+		</ul>
+	<div class='user-nav'>
+		<h4>Welcome <%= @user.first_name %></h4>
+		<p><%= link_to('Log Off', destroy_user_session_path, :method => "delete", :class => "btn btn-default") %></p>
+	</div>
+	</div>
+</nav>
+<div class='container'>
+	<div class='row wine-cellar'>
+		<div class='col-sm-12 wine-cellar'>
+			<h1><%= @cellar.name %> (<%= @cellar.classification %>)</h1> 
+			<a href="/cellars/<%= @user.id %>/edit">
+				<div class='col-sm-8 wine-list home-group'>
+					<h2>Your Wines</h2>
+					<p><%= link_to('Edit Cellar', edit_cellar_path, :class => "btn btn-warning") %></p>
+					<table class='table table-condensed table-striped'>
+						<thead>
+							<th>Category</th>
+							<th>Winery</th>
+							<th>Type</th>
+							<th>Year</th>
+							<th>Price</th>
+							<th>Action</th>
+						</thead>
+						<tbody>
+						<% @wines.each do |wine| %>
+							<tr>
+								<td><%= wine.wine_category.name %></td>
+								<td><%= wine.winery %></td>
+								<td><%= wine.wine_type.name %></td>
+								<td><%= wine.year %></td>
+								<td>$<%= wine.price %></td>
+								<td><%= link_to('Remove', destroy_wines_path(cellar_id: @cellar.id, id: wine.id), :method => "delete", :class => "btn btn-default") %></td>
+							</tr>
+						<% end %>
+						</tbody>
+					</table>
+				</div>
+			</a>
+		</div>
+		<a href="/cellars/<%= @cellar.id %>/wines" class='btn btn-primary create-add'>Add Wine</a>
+	</div>
+</div>

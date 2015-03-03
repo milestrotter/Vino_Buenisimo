@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cellar_id: 
+  wine_id: 
+
+two:
+  cellar_id: 
+  wine_id: 

@@ -1,0 +1,35 @@
+<nav class='navbar navbar-default'>
+	<div classs='navbar-header'>
+		<a href="/home" class='navbar-brand'>Vino Buenisimo</a>
+	</div>
+	<div class='collapse navbar-collapse'>
+		<ul class='nav navbar-nav'>
+			<li><a href="/home">Home</a></li>
+			<li class='active btn btn-default'><a href="/users/<%= @user.id %>/cellars">Cellars</a></li>
+			<li><a href="/friends">Friends</a></li>
+			<li><a href="/users/<%= @user.id %>">Profile</a></li>
+			<li><a href="/messages">Messages</a></li>
+			<li><a href="/trends">Trends</a></li>
+		</ul>
+	<div class='user-nav'>
+		<h4>Welcome <%= @user.first_name %></h4>
+		<p><%= link_to('Log Off', destroy_user_session_path, :method => "delete", :class => "btn btn-default") %></p>
+	</div>
+	</div>
+</nav>
+<div class='container'>
+	<div class='row'>
+		<h2><%= @cellar_id %></h2>
+		<div class='col-sm-4 home-group'>
+			<%= simple_form_for @wine  do |f| %>
+				<%= f.input  :wine_category_id, collection: @wine_category, prompt: "Category" %>
+				<%= f.input  :winery %>
+				<%= f.input  :wine_type_id, collection: @wine_type, prompt: "Type" %>
+				<%= f.input  :year %>
+				<%= f.input  :price, :placeholder => "$", :input_html => {value: (number_with_precision(f.object.price, :precision => 2 ))} %>
+				<%= f.input  :cellar_id, :as => :hidden, :input_html => { :value => @cellar.id } %>
+				<%= f.submit "Add Wine", :class => "btn btn-primary" %>
+			<% end %>
+		</div>
+	</div>
+</div>
